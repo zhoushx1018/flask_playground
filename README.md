@@ -1,6 +1,11 @@
 # flask_playground
 flask playground
 
+《flask入门教程》https://read.helloflask.com 
+
+从零开始编码
+
+
 ## 安装
 
 git clone源码
