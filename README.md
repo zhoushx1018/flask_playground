@@ -18,6 +18,11 @@ $ git clone https://github.com/zhoushx1018/flask_playground.git
 $ pip3 install -r requirements.txt
 ```
 
+初始化DB数据
+
+```
+$ flask forge
+```
 
 启动http服务
 

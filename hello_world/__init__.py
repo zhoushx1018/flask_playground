@@ -67,7 +67,7 @@ def forge():
     db.create_all()
 
     # 全局的两个变量移动到这个函数内
-    name = 'Grey Li'
+    name = 'Steve Zhou'
     movies = [
         {'title': 'My Neighbor Totoro', 'year': '1988'},
         {'title': 'Dead Poets Society', 'year': '1989'},
@@ -95,3 +95,8 @@ def index_from_db():
     user = User.query.first()  # 读取用户记录
     movies = Movie.query.all()  # 读取所有电影记录
     return render_template('index.html', user=user, movies=movies)
+
+@app.errorhandler(404)  # 传入要处理的错误代码
+def page_not_found(e):  # 接受异常对象作为参数
+    user = User.query.first()
+    return render_template('404.html', user=user), 404  # 返回模板和状态码
