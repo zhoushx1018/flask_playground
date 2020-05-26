@@ -39,6 +39,12 @@ $ curl http://localhost:8080/
 http://IP:8080/
 ```
 
+查看路由列表
+
+```
+$ flask routes
+```
+
 
 
 
