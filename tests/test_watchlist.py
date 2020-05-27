@@ -1,6 +1,7 @@
 import unittest
 
-from hello_world import app, db, Movie, User
+from watchlist import app, db
+from watchlist.models import Movie, User
 
 
 class WatchlistTestCase(unittest.TestCase):
