@@ -1,6 +1,6 @@
 import click
 from watchlist import app, db
-from watchlist.models import User, Movie
+from watchlist.models import User, Movie, Message
 
 @app.cli.command()  # 注册为命令
 @click.option('--drop', is_flag=True, help='Create after drop.')  # 设置选项
@@ -13,6 +13,8 @@ def initdb(drop):
 
 @app.cli.command()
 def forge():
+    from faker import Faker
+
     """Generate fake data."""
     db.create_all()
 
@@ -36,6 +38,17 @@ def forge():
     for m in movies:
         movie = Movie(title=m['title'], year=m['year'])
         db.session.add(movie)
+
+    fake = Faker()
+    click.echo('Working...')
+
+    for i in range(300):
+        message = Message(
+            name=fake.name(),
+            body=fake.sentence(),
+            timestamp=fake.date_time_this_year()
+        )
+        db.session.add(message)
 
     db.session.commit()
     click.echo('Done.')

@@ -2,7 +2,7 @@ from flask import url_for
 from flask import request, redirect, flash
 from flask_login import login_user,login_required, logout_user, current_user
 from watchlist import app, db
-from watchlist.models import Movie, User
+from watchlist.models import Movie, User, Message
 from flask import render_template
 
 
@@ -42,7 +42,29 @@ def index():
 
     user = User.query.first()
     movies = Movie.query.all()
-    return render_template('index.html', user=user, movies=movies)
+    messages = Message.query.order_by(Message.timestamp.desc()).all()
+
+    return render_template('index.html', user=user, movies=movies, messages=messages)
+
+@app.route('/message', methods=['POST'])
+def message():
+    if request.method == 'POST':  # 判断是否是 POST 请求
+        # 获取表单数据
+        name = request.form.get('GuestName')  # 传入表单对应输入字段的 name 值
+        body = request.form.get('GuestMessage')
+        # 验证数据
+        if not name or not body or len(body) > 60:
+            flash('Invalid input.')  # 显示错误提示
+            return redirect(url_for('index'))  # 重定向回主页
+
+        # 保存表单数据到数据库
+        message = Message(name=name, body=body)  # 创建记录
+        db.session.add(message)  # 添加到数据库会话
+        db.session.commit()  # 提交数据库会话
+        flash('Your message have been sent to the world!')
+        return redirect(url_for('index'))
+
+    return redirect(url_for('index'))
 
 
 @app.route('/user/<name>')

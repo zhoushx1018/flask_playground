@@ -25,4 +25,25 @@
     </form>
 {% endif %}
 <img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}" title="to~to~ro~">
+
+
+<form method="post" action="{{url_for('message')}}">
+    GuestName <input type="text" name="GuestName" autocomplete="off" required>
+    GuestMessage <input type="text" name="GuestMessage" autocomplete="off" required>
+    <input class="btn" type="submit" name="GuestMessageSubmit" value="AddMessage">
+</form>
+
+<h5>{{ messages|length }} messages
+    <small class="float-right">
+        <a href="#bottom" title="Go Bottom">&darr;</a>
+    </small>
+</h5>
+<div class="movie-list">
+    {% for message in messages %}
+        <li>{{ message.name }} - {{ message.body }}-{{ moment(message.timestamp).fromNow(refresh=True) }}
+        </li>
+    {% endfor %}
+</div>
+
+
 {% endblock %}
