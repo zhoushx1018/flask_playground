@@ -13,18 +13,18 @@ git clone源码
 $ git clone https://github.com/zhoushx1018/flask_playground.git
 ```
 
-安装依赖
+## 安装依赖
 ```
 $ pip3 install -r requirements.txt
 ```
 
-初始化DB数据
+## 初始化DB数据
 
 ```
 $ flask forge
 ```
 
-启动http服务
+## 启动http服务
 
 ```
 ## Running on http://0.0.0.0:8080/
@@ -32,19 +32,28 @@ $
 $ flask run -h 0.0.0.0  -p 8080 
 ```
 
-在本地尝试访问服务
-
+## 在本地尝试访问服务
+此时无法维护（增删改）“电影列表”，只能查看
 ```
 $ curl http://localhost:8080/
 ```
 
-通过浏览器访问服务
+## 注册（新增）管理员账号，用于维护列表
+用管理员账号登录后，可以维护（增删改）“电影列表”
+```
+$ flask admin
+
+```
+
+
+
+##　通过浏览器访问服务
 
 ```
 http://IP:8080/
 ```
 
-查看路由列表
+＃＃　查看路由列表
 
 ```
 $ flask routes
