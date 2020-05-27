@@ -61,4 +61,11 @@ $ flask routes
 
 
 
+##  (命令行)批量单元测试
 
+```
+$ pwd
+/home/ubuntu/sourceBuffer/github.com/zhoushx1018/flask_playground
+$ python3 -m unittest discover
+$ 
+```
