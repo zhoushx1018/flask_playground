@@ -1,0 +1,2 @@
+killall gunicorn
+killall nginx
