@@ -2,7 +2,7 @@ from flask import url_for
 from flask import request, redirect, flash
 from flask_login import login_user,login_required, logout_user, current_user
 from watchlist import app, db
-from watchlist.models import Movie, User, Message
+from watchlist.models import Movie, User, Message, AliPayTradeReturn
 from flask import render_template
 
 
@@ -166,11 +166,14 @@ def settings():
     return render_template('settings.html')
 
 
-
+# 订单支付完成，跳转到对应的页面
 @app.route('/result/', methods=['GET', 'POST'])
 def result():
-    # 订单支付完成，跳转到对应的页面
-    return render_template('result.html')
+    out_trade_no = request.args['out_trade_no']
+    total_amount = request.args['total_amount']
+    aliPayTradeReturn = AliPayTradeReturn(order_no=out_trade_no, pay_amount= total_amount)
+
+    return render_template('result.html', aliPayTradeReturn=aliPayTradeReturn)
 
 @app.route('/notify/', methods=['GET', 'POST'])
 def notify():

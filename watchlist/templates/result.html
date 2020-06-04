@@ -3,4 +3,6 @@
 {% block content %}
 <h2>Pay Success</h2>
 <h4>Congratulation!!! {{ current_user.name }}'s pay is ok</h4>
+<h4>TradeNo: {{ aliPayTradeReturn.order_no }}</h4>
+<h4>TotalAmount: {{ aliPayTradeReturn.pay_amount }}</h4>
 {% endblock %}

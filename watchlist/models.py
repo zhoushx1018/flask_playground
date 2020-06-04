@@ -42,3 +42,11 @@ class Message(db.Model):
     name = db.Column(db.String(20))
     body = db.Column(db.String(200))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+
+class AliPayTradeReturn(db.Model):
+    # __tablename__ = "md_orders"
+    orders_id = db.Column(db.Integer, primary_key=True)  # 订单序号
+    order_no = db.Column(db.String(26), nullable=False)  # 订单编号
+    pay_amount = db.Column(db.DECIMAL, nullable=False)  # 支付金额
+    pay_status = db.Column(db.SmallInteger, nullable=False, default=0)   # 支付状态
