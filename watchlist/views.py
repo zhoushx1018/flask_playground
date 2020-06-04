@@ -167,12 +167,12 @@ def settings():
 
 
 
-@app.route('/result', methods=['GET', 'POST'])
+@app.route('/result/', methods=['GET', 'POST'])
 def result():
     # 订单支付完成，跳转到对应的页面
     return render_template('result.html')
 
-@app.route('/notify', methods=['GET', 'POST'])
+@app.route('/notify/', methods=['GET', 'POST'])
 def notify():
     # 订单支付完成，跳转到对应的页面
     return render_template('notify.html')
