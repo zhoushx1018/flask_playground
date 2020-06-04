@@ -47,7 +47,11 @@ class AliPay(object):
         }
 
         biz_content.update(kwargs)
-        data = self.build_body("alipay.trade.page.pay", biz_content, self.return_url)
+
+        # method
+        #   alipay.trade.page.pay 支付宝网页扫描支付
+        #   alipay.trade.wap.pay  跳转手机app支付
+        data = self.build_body("alipay.trade.wap.pay", biz_content, self.return_url)
         return self.sign_data(data)
 
     def build_body(self, method, biz_content, return_url=None):
