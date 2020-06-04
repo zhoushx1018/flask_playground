@@ -72,10 +72,13 @@ def hello_user(name):
     return 'hi, %s' % name
 
 @app.route('/test')
+@login_required
 def test_url_for():
-    print(url_for('hello'))
-    print(url_for('hello_user', name='steveZhou'))
-    return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
+    # print(url_for('hello'))
+    # print(url_for('hello_user', name='steveZhou'))
+    # return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
+    # return render_template('result.html')
+    return render_template('notify.html')
 
 
 
@@ -161,3 +164,25 @@ def settings():
         return redirect(url_for('index'))
 
     return render_template('settings.html')
+
+
+
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    # 订单支付完成，跳转到对应的页面
+    return render_template('result.html')
+
+@app.route('/notify', methods=['GET', 'POST'])
+def notify():
+    # 订单支付完成，跳转到对应的页面
+    return render_template('notify.html')
+
+@app.route('/alipay/send_test_order', methods=['GET','POST'])
+def sendOrder():
+    from .alipay import Pay
+    payUrl = Pay().post()
+    re_url = payUrl['re_url']
+    print("re_url=%s\n" % re_url)
+
+    # return redirect(url_for('index'))
+    return redirect(re_url)

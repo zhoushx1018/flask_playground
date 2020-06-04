@@ -69,3 +69,11 @@ $ pwd
 $ python3 -m unittest discover
 $ 
 ```
+
+## 支付宝沙箱，支付测试
+```
+
+http://IP:8080/alipay/send_test_order
+ 
+```
+
