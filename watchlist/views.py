@@ -78,7 +78,9 @@ def test_url_for():
     # print(url_for('hello_user', name='steveZhou'))
     # return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
     # return render_template('result.html')
-    print('IP={}\n'.format(request.remote_addr))
+    message = 'IP={}\n'.format(request.remote_addr)
+    print(message)
+    flash(message)
     return render_template('notify.html')
 
 
