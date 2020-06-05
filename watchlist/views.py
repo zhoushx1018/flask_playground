@@ -4,6 +4,7 @@ from flask_login import login_user,login_required, logout_user, current_user
 from watchlist import app, db
 from watchlist.models import Movie, User, Message, AliPayTradeReturn
 from flask import render_template
+from watchlist.tools import GetRealIP
 
 
 # @app.route('/')
@@ -78,7 +79,9 @@ def test_url_for():
     # print(url_for('hello_user', name='steveZhou'))
     # return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
     # return render_template('result.html')
-    message = 'IP={}\n'.format(request.remote_addr)
+
+    realIP = GetRealIP(request)
+    message = 'realIP={}\n'.format(realIP)
     print(message)
     flash(message)
     return render_template('notify.html')
