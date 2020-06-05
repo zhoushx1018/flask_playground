@@ -78,6 +78,7 @@ def test_url_for():
     # print(url_for('hello_user', name='steveZhou'))
     # return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
     # return render_template('result.html')
+    print('IP={}\n'.format(request.remote_addr))
     return render_template('notify.html')
 
 
@@ -183,7 +184,7 @@ def notify():
 @app.route('/alipay/send_test_order', methods=['GET','POST'])
 def sendOrder():
     from .alipay import Pay
-    payUrl = Pay().post()
+    payUrl = Pay().post(request.remote_addr)
     re_url = payUrl['re_url']
     print("re_url=%s\n" % re_url)
 

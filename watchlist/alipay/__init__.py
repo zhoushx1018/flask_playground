@@ -140,19 +140,21 @@ alipay = AliPay(
 
 
 class Pay():
-    def post(self):
+    def post(self,userID):
         # 获取订单号，根据订单生成 支付订单
         # 支付订单包括: 订单号、支付金额、订单名称
 
         dateTime_p = datetime.now()
         strCurrDateTime = datetime.strftime(dateTime_p, '%Y%m%d%H%M%S')
-        print("dateTime_p=%s|strCurrDateTime=%s" % (str(dateTime_p), strCurrDateTime))
+        # print("dateTime_p=%s|strCurrDateTime=%s" % (str(dateTime_p), strCurrDateTime))
+        trade_no = '{}_{}'.format(strCurrDateTime, userID)
+        # print("trade_no=%s" % trade_no)
 
         # 传递参数执行支付类里的direct_pay方法，返回签名后的支付参数，
         url = alipay.direct_pay(
             subject="测试订单",  # 订单名称
             # 订单号生成，一般是当前时间(精确到秒)+用户ID+随机数
-            out_trade_no= strCurrDateTime,  # 订单号
+            out_trade_no= trade_no,  # 订单号
             total_amount=0.5,  # 支付金额
             return_url="https://39.108.52.9:1317/result/"  # 支付成功后，跳转url 【客户端显示】
         )
@@ -176,7 +178,11 @@ class PayNotify():  # 异步支付通知
 
 
 if __name__ == '__main__':
-    payUrl = Pay().post()
+    payUrl = Pay().post(22)
+    print("payUrl=%s\n" % payUrl)
+    print("re_url=%s\n" % payUrl['re_url'])
+
+    payUrl = Pay().post("192.168.10.11")
     print("payUrl=%s\n" % payUrl)
     print("re_url=%s\n" % payUrl['re_url'])
 
