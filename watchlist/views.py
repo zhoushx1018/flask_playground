@@ -189,7 +189,7 @@ def notify():
 @app.route('/alipay/send_test_order', methods=['GET','POST'])
 def sendOrder():
     from .alipay import Pay
-    payUrl = Pay().post(request.remote_addr)
+    payUrl = Pay().post(GetRealIP(request))
     re_url = payUrl['re_url']
     print("re_url=%s\n" % re_url)
 
