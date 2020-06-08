@@ -74,7 +74,7 @@ def hello_user(name):
 
 @app.route('/test')
 @login_required
-def test_url_for():
+def test():
     # print(url_for('hello'))
     # print(url_for('hello_user', name='steveZhou'))
     # return ( 'get url|hello=%s|hello_user=%s' %(url_for('hello'), url_for('hello_user', name='steveZhou') ))
@@ -84,6 +84,7 @@ def test_url_for():
     message = 'realIP={}\n'.format(realIP)
     print(message)
     flash(message)
+    app.logger.debug("11111111|message=%s" , message)
     return render_template('notify.html')
 
 
@@ -131,12 +132,14 @@ def login():
 
         user = User.query.first()
         # 验证用户名和密码是否一致
+        app.logger.debug("start validate")
         if username == user.username and user.validate_password(password):
             login_user(user)  # 登入用户
             flash('Login success.')
+            app.logger.info("login success|userName=%s" % user.username)
             return redirect(url_for('index'))  # 重定向到主页
 
-        flash('Invalid username or password.')  # 如果验证失败，显示错误消息
+        app.logger.error("Invalid username or password|userName=%s" % user.username)
         return redirect(url_for('login'))  # 重定向回登录页面
 
     return render_template('login.html')
