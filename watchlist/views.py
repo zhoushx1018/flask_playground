@@ -68,6 +68,7 @@ def message():
     return redirect(url_for('index'))
 
 
+@app.route('/user', defaults={'name':"admin"})
 @app.route('/user/<name>')
 def hello_user(name):
     return 'hi, %s' % name
