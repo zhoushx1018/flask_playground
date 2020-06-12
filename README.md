@@ -77,3 +77,5 @@ http://IP:8080/alipay/send_test_order
  
 ```
 
+## XSS攻击演示
+详见 flask_playground/hacktest/

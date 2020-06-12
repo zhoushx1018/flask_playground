@@ -5,6 +5,7 @@ from watchlist import app, db
 from watchlist.models import Movie, User, Message, AliPayTradeReturn
 from flask import render_template
 from watchlist.tools import GetRealIP
+from flask import render_template_string
 
 
 # @app.route('/')
@@ -72,6 +73,15 @@ def message():
 @app.route('/user/<name>')
 def hello_user(name):
     return 'hi, %s' % name
+
+@app.route('/hello-template-injection')
+def hello_ssti():
+    person = {'name':"world", 'secret':"UGhldmJoZj8gYWl2ZnZoei5wYnovcG5lcnJlZg=="}
+    if request.args.get('name'):
+        person['name'] = request.args.get('name')
+    template = '''<h2>Hello %s!</h2>''' % person['name']
+    return render_template_string(template, person=person)
+
 
 @app.route('/test')
 @login_required
